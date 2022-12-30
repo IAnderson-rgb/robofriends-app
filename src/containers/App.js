@@ -23,23 +23,13 @@ class App extends Component {
 
 	onSearchChange = (event) => {
 		this.setState({ searchfield: event.target.value });
-	}
-
-	onSelectCard = (event) => {
-		this.setState({selected: event.target.name});
-		console.log({selected: event.target.name});
-	}
+	};
 
 	render() {
 		const { robots, searchfield } = this.state;
 		const filteredRobots = robots.filter((robot) => {
 			return robot.name.toLowerCase().includes(searchfield.toLowerCase());
 		});
-		
-		// const getRobotDetails = robots.filter((robot) => {
-		// 	return robot.name.toLowerCase().includes(selected.toLowerCase());
-		// });
-
 		return !robots.length ? (
 			<h1>..Loading</h1>
 		) : (
@@ -50,7 +40,7 @@ class App extends Component {
 				<SearchBox searchChange={this.onSearchChange} />
 				<Scroll>
 					<ErrorBoundary>
-						<CardList robots={filteredRobots} selectCard={this.onSelectCard}/>
+						<CardList robots={filteredRobots} />
 					</ErrorBoundary>
 				</Scroll>
 			</div>
