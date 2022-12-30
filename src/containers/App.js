@@ -12,7 +12,6 @@ class App extends Component {
 		this.state = {
 			robots: [],
 			searchfield: '',
-			selected: ''
 		};
 	}
 
@@ -32,7 +31,7 @@ class App extends Component {
 	}
 
 	render() {
-		const { robots, searchfield, selected } = this.state;
+		const { robots, searchfield } = this.state;
 		const filteredRobots = robots.filter((robot) => {
 			return robot.name.toLowerCase().includes(searchfield.toLowerCase());
 		});
