@@ -12,6 +12,7 @@ class App extends Component {
 		this.state = {
 			robots: [],
 			searchfield: '',
+			selected: ''
 		};
 	}
 
@@ -23,22 +24,34 @@ class App extends Component {
 
 	onSearchChange = (event) => {
 		this.setState({ searchfield: event.target.value });
-	};
+	}
+
+	onSelectCard = (event) => {
+		this.setState({selected: event.target.name});
+		console.log({selected: event.target.name});
+	}
 
 	render() {
-		const { robots, searchfield } = this.state;
+		const { robots, searchfield, selected } = this.state;
 		const filteredRobots = robots.filter((robot) => {
 			return robot.name.toLowerCase().includes(searchfield.toLowerCase());
 		});
+		
+		// const getRobotDetails = robots.filter((robot) => {
+		// 	return robot.name.toLowerCase().includes(selected.toLowerCase());
+		// });
+
 		return !robots.length ? (
 			<h1>..Loading</h1>
 		) : (
 			<div className='tc'>
-				<h1 className='f1'>RoboFriends</h1>
+				<h1 className='neon' data-text='U'>ROB<span 
+				className='flicker-slow'>O</span>FRI<span 
+				className='flicker-fast'>E</span>NDS</h1>
 				<SearchBox searchChange={this.onSearchChange} />
 				<Scroll>
 					<ErrorBoundary>
-						<CardList robots={filteredRobots} />
+						<CardList robots={filteredRobots} selectCard={this.onSelectCard}/>
 					</ErrorBoundary>
 				</Scroll>
 			</div>
